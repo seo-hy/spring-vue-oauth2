@@ -1,5 +1,5 @@
 <template>
-  <div>join</div>
+  <div>Log</div>
 </template>
 
 <script>
