@@ -3,15 +3,18 @@ package com.springvueoauth2.server.formmapper;
 import com.springvueoauth2.server.form.UserForm;
 import com.springvueoauth2.server.model.User;
 import java.util.List;
+import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 
 @Mapper(
-    implementationName = "UserFormMapperImpl"
+    componentModel = "spring",
+    implementationName = "UserFormMapperImpl",
+    builder = @Builder(disableBuilder = true)
 )
 public interface UserFormMapper {
 
-  public abstract User toUser(UserForm.Input.Add in);
+  User toUser(UserForm.Input.Add in);
 
-  public abstract List<UserForm.Output.GetAll> toGetAll(List<User> in);
+  List<UserForm.Output.GetAll> toGetAll(List<User> in);
 
 }

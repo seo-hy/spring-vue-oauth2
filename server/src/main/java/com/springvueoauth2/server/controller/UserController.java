@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,14 +26,14 @@ public class UserController {
   @SneakyThrows
   @ApiOperation("일반 사용자 등록")
   @PostMapping("/user")
-  public ResponseEntity addUser(UserForm.Input.Add in) {
+  public ResponseEntity addUser(@RequestBody UserForm.Input.Add in) {
     return new ResponseEntity(service.addUser(in), null, HttpStatus.CREATED);
   }
 
   @SneakyThrows
   @ApiOperation("일반 관리자 등록")
   @PostMapping("/admin")
-  public ResponseEntity addAdmin() {
+  public ResponseEntity addAdmin(@RequestBody UserForm.Input.Add in) {
     return null;
   }
 
