@@ -1,4 +1,4 @@
-package com.springvueoauth2.server.config.swagger;
+package com.springvueoauth2.server.config;
 
 
 import java.util.ArrayList;
@@ -46,8 +46,8 @@ public class SwaggerConfig {
 
     int tagOrd = 0;
     docket.tags(
-        new Tag("User", "유저 API", ++tagOrd),
         new Tag("Login", "로그인 API", ++tagOrd),
+        new Tag("User", "유저 API", ++tagOrd),
         new Tag("Log", "로그 API", ++tagOrd)
     );
     return docket;

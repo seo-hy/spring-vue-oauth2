@@ -15,6 +15,9 @@ public interface UserFormMapper {
 
   User toUser(UserForm.Input.Add in);
 
-  List<UserForm.Output.GetAll> toGetAll(List<User> in);
+  List<UserForm.Output.Get> toGetList(List<User> in);
+
+  UserForm.Output.Get toGet(User in);
+
 
 }

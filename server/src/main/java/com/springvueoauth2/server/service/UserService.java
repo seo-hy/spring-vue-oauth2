@@ -5,8 +5,10 @@ import com.springvueoauth2.server.formmapper.UserFormMapper;
 import com.springvueoauth2.server.model.Role;
 import com.springvueoauth2.server.model.User;
 import com.springvueoauth2.server.repository.UserRepository;
+import java.security.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,22 +18,41 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final UserFormMapper formMapper;
+  private final PasswordEncoder passwordEncoder;
 
   @Transactional
   public Long addUser(UserForm.Input.Add in) {
+
+    if (userRepository.findByLoginId(in.getLoginId()).isPresent()) {
+      throw new IllegalStateException("중복된 아이디가 존재합니다.");
+    }
     User user = formMapper.toUser(in);
     user.setRole(Role.USER);
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     return userRepository.save(user).getId();
   }
 
   @Transactional
-  public Long addAdmin(User user) {
+  public Long addAdmin(UserForm.Input.Add in) {
+
+    if (userRepository.findByLoginId(in.getLoginId()).isPresent()) {
+      throw new IllegalStateException("중복된 아이디가 존재합니다.");
+    }
+
+    User user = formMapper.toUser(in);
     user.setRole(Role.ADMIN);
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+
     return userRepository.save(user).getId();
   }
 
   @Transactional(readOnly = true)
-  public List<User> getAll() {
-    return userRepository.findAll();
+  public List<UserForm.Output.Get> getAll() {
+    return formMapper.toGetList(userRepository.findAll());
+  }
+
+  @Transactional(readOnly = true)
+  public UserForm.Output.Get getMe(Principal principal) {
+    return formMapper.toGet(userRepository.findByLoginId(principal.getName()).get());
   }
 }

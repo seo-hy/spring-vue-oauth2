@@ -37,13 +37,16 @@ public class UserForm {
     @ToString
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class GetAll {
+    public static class Get {
 
       @ApiModelProperty(value = "로그인아이디")
       private String loginId;
 
       @ApiModelProperty(value = "이름")
       private String name;
+
+      @ApiModelProperty(value = "권한")
+      private String role;
 
     }
   }
