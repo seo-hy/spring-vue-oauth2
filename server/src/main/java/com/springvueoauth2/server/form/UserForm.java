@@ -27,6 +27,27 @@ public class UserForm {
       @ApiModelProperty(value = "비밀번호")
       private String password;
 
+      @ApiModelProperty(value = "전화번호")
+      private String phone;
+
+    }
+
+    @Data
+    @Builder
+    @ToString
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Modify {
+
+      @ApiModelProperty(value = "이름")
+      private String name;
+
+      @ApiModelProperty(value = "비밀번호")
+      private String password;
+
+      @ApiModelProperty(value = "전화번호")
+      private String phone;
+
     }
   }
 
@@ -47,6 +68,9 @@ public class UserForm {
 
       @ApiModelProperty(value = "권한")
       private String role;
+
+      @ApiModelProperty(value = "전화번호")
+      private String phone;
 
     }
   }

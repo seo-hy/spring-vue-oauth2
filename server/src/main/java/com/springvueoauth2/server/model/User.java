@@ -31,6 +31,9 @@ public class User {
   private String password;
 
   @Column
+  private String phone;
+
+  @Column
   private String imagePath;
 
   @Column

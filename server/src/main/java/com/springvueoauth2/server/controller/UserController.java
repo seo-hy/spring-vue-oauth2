@@ -12,7 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,6 +54,13 @@ public class UserController {
   @GetMapping("/user/logged")
   public ResponseEntity get(Principal principal) {
     return new ResponseEntity(service.getMe(principal), null, HttpStatus.OK);
+  }
+
+  @SneakyThrows
+  @ApiOperation("사용자 수정")
+  @PutMapping("/user/{userId}")
+  public ResponseEntity modify(@PathVariable Long userId, @RequestBody UserForm.Input.Modify in) {
+    return new ResponseEntity(service.modify(userId, in), null, HttpStatus.OK);
   }
 
 }

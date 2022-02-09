@@ -44,6 +44,7 @@ public class SecurityAuthorizationConfig extends AuthorizationServerConfigurerAd
     endpoints.tokenStore(tokenStore)
         .authenticationManager(authenticationManager)
         .userDetailsService(userDetailsService);
+//        .pathMapping("/oauth/token", "/api/login/get-token");
   }
 
 }
