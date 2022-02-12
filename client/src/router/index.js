@@ -1,11 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Signin from "../views/Signin.vue";
+import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Info from "../views/Info.vue";
 import Community from "../views/Community.vue";
-import Log from "../views/Log.vue";
+import Setting from "../views/Setting.vue";
 import MyPage from "../views/MyPage.vue";
 import NotFound from "../views/NotFound.vue";
 
@@ -20,9 +20,9 @@ const router = new VueRouter({
       component: Home,
     },
     {
-      name: "signin",
-      path: "/signin",
-      component: Signin,
+      name: "signup",
+      path: "/signup",
+      component: Signup,
     },
     {
       name: "login",
@@ -40,9 +40,9 @@ const router = new VueRouter({
       component: Info,
     },
     {
-      name: "log",
-      path: "/log",
-      component: Log,
+      name: "setting",
+      path: "/setting",
+      component: Setting,
     },
     {
       name: "mypage",

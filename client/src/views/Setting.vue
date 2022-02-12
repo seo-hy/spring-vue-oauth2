@@ -1,5 +1,5 @@
 <template>
-  <div>Log</div>
+  <div>setting</div>
 </template>
 
 <script>

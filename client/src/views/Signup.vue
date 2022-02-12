@@ -1,42 +1,85 @@
 <template>
   <div class="form">
-    <div class="form__title">Log In</div>
+    <div class="form__title">Sign Up</div>
     <form>
-      <div class="social-login">
-        <img src="@/assets/login/google-login.png" />
-        <img src="@/assets/login/kakao-login.png" />
-        <img src="@/assets/login/naver-login.png" />
-      </div>
-      <div class="form__or">or</div>
       <div class="form__field">
-        <label for="id"><i class="fa fa-envelope"></i> Email</label>
-        <input type="text" name="id" placeholder="Enter your email" />
+        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+        <input type="text" id="email" placeholder="Enter your email" />
+      </div>
+      <div class="form__field">
+        <label for="name"><i class="fa fa-user"></i> Name</label>
+        <input type="text" id="name" placeholder="Enter your name" v-model="name" />
       </div>
       <div class="form__field">
         <label for="password"><i class="fa fa-key"></i> Password</label>
-        <input type="password" name="password" placeholder="Enter your password" />
-      </div>
 
-      <div class="form__btn">
+        <input type="password" id="password" placeholder="Enter your password" v-model="password" />
+      </div>
+      <div class="form__field">
+        <label for="phone"><i class="fa fa-phone"></i> Phone</label>
+        <input type="text" id="phone" placeholder="Enter your phone number" v-model="phone" />
+      </div>
+      <div class="form__btn form__btn-login">
         <button class="form__btn-main" type="submit">Submit</button>
       </div>
     </form>
-    <div class="form__btn">
-      <button class="form__btn-sub" @click="$router.push({ name: 'signup' })">Sign Up</button>
+    <div class="form__btn form__btn-signup">
+      <button class="form__btn-sub" @click="$router.push({ name: 'login' })">Log In</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  data() {
+    return {
+      notifyType: {
+        success: "success",
+        error: "error",
+      },
+      loginId: "",
+      name: "",
+      password: "",
+      phone: "",
+    };
+  },
+  methods: {
+    signup() {
+      axios
+        .post("http://localhost:8081/api/user/signup", {
+          loginId: this.loginId,
+          name: this.name,
+          password: this.password,
+          phone: this.phone,
+        })
+        .then((res) => {
+          this.$router.push({ name: "home" });
+          this.notifyMessage(this.notifyType.success, "Signup Success"`Welcome, ${res.data.loginId}!`);
+        })
+        .catch((err) => {
+          this.notifyMessage(this.notifyType.error, "Signup Fail", err);
+        });
+    },
+    notifyMessage(type, title, message) {
+      this.$notify({
+        group: "mainNotify",
+        type: type,
+        duration: 3000,
+        title: title,
+        text: message,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
 .form {
   font-family: "Noto Sans", sans-serif;
   width: 400px;
-  height: 470px;
-  margin: 80px auto;
+  height: 540px;
+  margin: 60px auto;
   background-color: white;
   border-radius: 25px;
   -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.1);
@@ -45,10 +88,11 @@ export default {};
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 900;
   color: #3b3b3b;
   box-shadow: inset 0px -2px 0px 0px #f8f8f8;
   text-shadow: 2px 2px 2px rgba(204, 204, 204, 0.658);
+  margin-bottom: 20px;
 }
 .form__field {
   display: flex;
@@ -112,6 +156,7 @@ button {
   transition: opacity 0.25s ease-out;
   box-shadow: 2px 3px 3px rgb(221, 221, 221);
 }
+
 .form__btn-main {
   background: #b09ebde0;
 }
@@ -120,27 +165,6 @@ button {
 }
 button:hover {
   opacity: 0.8;
-}
-.social-login {
-  padding-top: 20px;
-  width: 300px;
-  text-align: center;
-  margin: 0 auto;
-}
-.social-login > img {
-  width: 40px;
-  margin: 0 10px;
-  filter: drop-shadow(2px 2px 2px rgb(185, 185, 185));
-  opacity: 0.9;
-}
-.social-login > img:hover {
-  opacity: 0.7;
-}
-.form__or {
-  width: 100%;
-  text-align: center;
-  margin: 10px 0;
-  color: #bbbbbb;
 }
 .form__btn-main {
   margin-top: 5px;

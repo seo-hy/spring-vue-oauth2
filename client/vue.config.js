@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   devServer: {
     overlay: false,
@@ -9,5 +11,8 @@ module.exports = {
         logLevel: "debug",
       },
     },
+  },
+  chainWebpack: (config) => {
+    config.resolve.alias.set("@", path.resolve(__dirname, "src/"));
   },
 };

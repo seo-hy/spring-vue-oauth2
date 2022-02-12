@@ -1,20 +1,19 @@
 <template>
   <div class="nav-bar">
-    <div class="nav-bar-default">
-      <router-link to="/">HOME</router-link>
-      <router-link to="/info">INFO</router-link>
-      <router-link to="/community">COMMUNITY</router-link>
-      <router-link to="/log">LOG</router-link>
-    </div>
-
-    <div v-if="isAuth" class="nav-bar-auth">
-      <router-link to="/mypage">mypage</router-link>
-      <div>logout</div>
-    </div>
-    <div v-else class="nav-bar-auth">
-      <router-link to="/signin">signin</router-link>
-      <router-link to="/login">login</router-link>
-    </div>
+    <ul>
+      <router-link tag="li" :to="{ name: 'home' }">Home</router-link>
+      <router-link tag="li" :to="{ name: 'info' }">Info</router-link>
+      <router-link tag="li" :to="{ name: 'community' }">Community</router-link>
+      <router-link tag="li" :to="{ name: 'setting' }">Setting</router-link>
+      <div v-if="isAuth" class="nav-bar-auth">
+        <router-link to="/mypage">mypage</router-link>
+        <div>logout</div>
+      </div>
+      <div v-else class="nav-bar-auth">
+        <router-link tag="li" to="/signup">signup</router-link>
+        <router-link tag="li" to="/ogin">login</router-link>
+      </div>
+    </ul>
   </div>
 </template>
 
@@ -25,14 +24,49 @@ export default {
       isAuth: false,
     };
   },
-  methods: {
-    login() {},
-  },
 };
 </script>
 
 <style scoped>
-.nav_bar {
-  background-color: rgb(207, 206, 201);
+.nav-bar {
+  background-color: rgb(247, 247, 245);
+  width: 800px;
+  height: 50px;
+  margin: 0 auto;
+  line-height: 50px;
+}
+ul {
+  margin: 0;
+  list-style-type: none;
+}
+li {
+  cursor: pointer;
+  float: left;
+}
+
+ul > li {
+  color: rgba(38, 138, 116, 0.856);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 35px;
+}
+.nav-bar-menu {
+  height: 100%;
+}
+.nav-bar-auth {
+  width: 150px;
+  height: 30px;
+  background-color: rgb(196, 196, 196);
+  margin-top: 10px;
+  margin-left: 20px;
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+}
+.nav-bar-auth > li {
+  font-size: 15px;
+  text-decoration: none;
+  margin: 0 15px;
 }
 </style>
