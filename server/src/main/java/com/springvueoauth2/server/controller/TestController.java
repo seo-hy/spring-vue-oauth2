@@ -18,7 +18,7 @@ public class TestController {
   @ApiOperation("커넥션 테스트")
   @GetMapping("/test")
   public String test(){
-    return "test";
+    return "Connection Success";
   }
 
 }

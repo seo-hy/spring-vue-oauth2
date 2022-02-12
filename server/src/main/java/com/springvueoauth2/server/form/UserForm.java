@@ -18,8 +18,8 @@ public class UserForm {
     @AllArgsConstructor
     public static class Add {
 
-      @ApiModelProperty(value = "로그인아이디")
-      private String loginId;
+      @ApiModelProperty(value = "이메일")
+      private String email;
 
       @ApiModelProperty(value = "이름")
       private String name;
@@ -60,8 +60,8 @@ public class UserForm {
     @AllArgsConstructor
     public static class Get {
 
-      @ApiModelProperty(value = "로그인아이디")
-      private String loginId;
+      @ApiModelProperty(value = "이메일")
+      private String email;
 
       @ApiModelProperty(value = "이름")
       private String name;

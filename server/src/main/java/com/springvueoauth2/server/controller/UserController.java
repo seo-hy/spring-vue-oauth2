@@ -30,8 +30,8 @@ public class UserController {
   @SneakyThrows
   @ApiOperation("일반 사용자 등록")
   @PostMapping("/user/signup")
-  public ResponseEntity addUser(@RequestBody UserForm.Input.Add in) {
-    return new ResponseEntity(service.addUser(in), null, HttpStatus.CREATED);
+  public UserForm.Output.Get addUser(@RequestBody UserForm.Input.Add in) {
+    return service.addUser(in);
   }
 
   @SneakyThrows
@@ -61,6 +61,13 @@ public class UserController {
   @PutMapping("/user/{userId}")
   public ResponseEntity modify(@PathVariable Long userId, @RequestBody UserForm.Input.Modify in) {
     return new ResponseEntity(service.modify(userId, in), null, HttpStatus.OK);
+  }
+
+  @SneakyThrows
+  @ApiOperation("이메일 중복확인")
+  @GetMapping("/user/duplicate")
+  public ResponseEntity duplivate(String email) {
+    return new ResponseEntity(service.duplicate(email), null, HttpStatus.OK);
   }
 
 }

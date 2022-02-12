@@ -52,7 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
         .cors().and()
         .csrf().disable()
-        .anonymous().disable()
         .authorizeRequests()
         .antMatchers("/swagger-ui.html").permitAll();
   }
@@ -64,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v2/api-docs", "/configuration/ui",
             "/swagger-resources", "/configuration/security", "/swagger-ui.html",
             "/webjars/**", "/swagger/**")
-        .antMatchers("/api/login", "/api/user/signup/**");
+        .antMatchers("/api/login", "/api/user/signup/**", "/api/test", "/api/user/duplicate");
 
   }
 
