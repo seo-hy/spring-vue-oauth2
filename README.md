@@ -12,9 +12,9 @@
 ### Oauth2
 - [x] Spring Security, OAuth2 기본 설정 및 접근권한 설정 (권한 : USER, ADMIN)
 - [x] 로그인 토큰 발급 및 리프레시 토큰 추가
-- [ ] 구글 로그인 추가
+- [x] 구글 로그인 추가
 - [ ] 네이버 로그인 추가
-- [ ] 카카오 로그인 추가
+- [x] 카카오 로그인 추가
 
 ### Swagger
 - [x] Authorization header 추가
