@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Api(value = "Test", tags = {"Test"})
-@RequestMapping(value = "/api")
+@RequestMapping()
 public class TestController {
 
   @SneakyThrows
   @ApiOperation("커넥션 테스트")
-  @GetMapping("/test")
+  @GetMapping("/api/test")
   public String test(){
     return "Connection Success";
   }
+
 
 }

@@ -1,4 +1,4 @@
-package com.springvueoauth2.server.config;
+package com.springvueoauth2.server.config.swagger;
 
 
 import java.util.ArrayList;

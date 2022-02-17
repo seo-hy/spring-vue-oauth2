@@ -13,16 +13,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableOAuth2Client
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final UserDetailsServiceImpl userDetailsService;
+
 
   @Bean
   @Override
@@ -54,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         .authorizeRequests()
         .antMatchers("/swagger-ui.html").permitAll();
+
   }
 
   @Override
@@ -63,7 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v2/api-docs", "/configuration/ui",
             "/swagger-resources", "/configuration/security", "/swagger-ui.html",
             "/webjars/**", "/swagger/**")
-        .antMatchers("/api/login", "/api/user/signup/**", "/api/test", "/api/user/duplicate");
+        .antMatchers("/api/login", "/api/user/signup/**", "/api/user/duplicate", "/api/test",
+            "/oauth2/redirect");
 
   }
 

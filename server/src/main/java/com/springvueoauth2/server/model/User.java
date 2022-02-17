@@ -39,4 +39,11 @@ public class User {
   @Column
   private Role role;
 
+  public User update(String name, String imagePath) {
+    this.name = name;
+    this.imagePath = imagePath;
+
+    return this;
+  }
+
 }
