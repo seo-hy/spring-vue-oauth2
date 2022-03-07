@@ -25,7 +25,7 @@ public class UserService {
   @Transactional
   public UserForm.Output.Get addUser(UserForm.Input.Add in) {
 
-    if (userRepository.findByEmail(in.getEmail()).isPresent()) {
+    if (userRepository.findByLoginId(in.getLoginId()).isPresent()) {
       throw new IllegalStateException("중복된 아이디가 존재합니다.");
     }
     User user = formMapper.toUser(in);
@@ -37,7 +37,7 @@ public class UserService {
   @Transactional
   public Long addAdmin(UserForm.Input.Add in) {
 
-    if (userRepository.findByEmail(in.getEmail()).isPresent()) {
+    if (userRepository.findByLoginId(in.getLoginId()).isPresent()) {
       throw new IllegalStateException("중복된 아이디가 존재합니다.");
     }
 
@@ -55,7 +55,7 @@ public class UserService {
 
   @Transactional(readOnly = true)
   public UserForm.Output.Get getMe(Principal principal) {
-    return formMapper.toGet(userRepository.findByEmail(principal.getName()).get());
+    return formMapper.toGet(userRepository.findByLoginId(principal.getName()).get());
   }
 
   @Transactional
@@ -70,8 +70,8 @@ public class UserService {
   }
 
   @Transactional(readOnly = true)
-  public Boolean duplicate(String email) {
-    if (userRepository.findByEmail(email).isPresent()) {
+  public Boolean duplicate(String loginId) {
+    if (userRepository.findByLoginId(loginId).isPresent()) {
       return true;
     } else {
       return false;

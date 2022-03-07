@@ -19,8 +19,8 @@ public class LoginForm {
     @AllArgsConstructor
     public static class Login {
 
-      @ApiModelProperty(value = "이메일")
-      private String email;
+      @ApiModelProperty(value = "아이디")
+      private String loginId;
 
       @ApiModelProperty(value = "비밀번호")
       private String password;

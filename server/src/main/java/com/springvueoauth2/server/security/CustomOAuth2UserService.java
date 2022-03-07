@@ -19,7 +19,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
   private final UserRepository userRepository;
 
-  private final AuthProvider authProvider;
+  private final AuthTokenProvider authTokenProvider;
 
 
   @Override
@@ -36,7 +36,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     User user = this.saveOrUpdate(attribute);
 
-    authProvider.setToken(user.getEmail());
+    authTokenProvider.setToken(user.getEmail());
 
     return new DefaultOAuth2User(
         Collections.singleton(new SimpleGrantedAuthority(user.getRole().getKey())),
@@ -47,8 +47,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
   private User saveOrUpdate(OAuthAttribute attribute) {
 
-    User user = userRepository.findByEmail(attribute.getEmail())
-        .map(entity -> entity.update(attribute.getName(), attribute.getPicture()))
+    User user = userRepository.findByLoginId(attribute.getUniqueId())
+        .map(entity -> entity.update(attribute.getName(), attribute.getPicture(),
+            attribute.getEmail()))
         .orElse(attribute.toEntity());
 
     return userRepository.save(user);

@@ -22,13 +22,16 @@ public class User {
   private Long id;
 
   @Column(unique = true)
-  private String email;
+  private String loginId;
 
-  @Column
+  @Column(nullable = false)
   private String name;
 
-  @Column
+  @Column(nullable = false)
   private String password;
+
+  @Column
+  private String email;
 
   @Column
   private String phone;
@@ -37,11 +40,15 @@ public class User {
   private String imagePath;
 
   @Column
+  private String provider;
+
+  @Column(nullable = false)
   private Role role;
 
-  public User update(String name, String imagePath) {
+  public User update(String name, String imagePath, String email) {
     this.name = name;
     this.imagePath = imagePath;
+    this.email = email;
 
     return this;
   }

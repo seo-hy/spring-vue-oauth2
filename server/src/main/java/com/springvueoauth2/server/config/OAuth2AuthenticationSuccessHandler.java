@@ -1,6 +1,6 @@
 package com.springvueoauth2.server.config;
 
-import com.springvueoauth2.server.security.AuthProvider;
+import com.springvueoauth2.server.security.AuthTokenProvider;
 import com.springvueoauth2.server.security.OAuthConsts;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -18,14 +18,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-  private final AuthProvider authProvider;
+  private final AuthTokenProvider authTokenProvider;
 
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws IOException, ServletException {
 
     String targetUrl = UriComponentsBuilder.fromUriString(OAuthConsts.REDIRECT_URL)
-        .queryParam("token", authProvider.getToken()).build().toUriString();
+        .queryParam("token", authTokenProvider.getToken()).build().toUriString();
     getRedirectStrategy().sendRedirect(request, response, targetUrl);
     this.clearAuthenticationAttributes(request);
   }

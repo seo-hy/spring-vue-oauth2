@@ -18,8 +18,8 @@ public class UserForm {
     @AllArgsConstructor
     public static class Add {
 
-      @ApiModelProperty(value = "이메일")
-      private String email;
+      @ApiModelProperty(value = "아이디")
+      private String loginId;
 
       @ApiModelProperty(value = "이름")
       private String name;
@@ -27,7 +27,10 @@ public class UserForm {
       @ApiModelProperty(value = "비밀번호")
       private String password;
 
-      @ApiModelProperty(value = "전화번호")
+      @ApiModelProperty(value = "이메일")
+      private String email;
+
+      @ApiModelProperty(value = "휴대폰번호")
       private String phone;
 
     }
@@ -45,7 +48,10 @@ public class UserForm {
       @ApiModelProperty(value = "비밀번호")
       private String password;
 
-      @ApiModelProperty(value = "전화번호")
+      @ApiModelProperty(value = "이메일")
+      private String email;
+
+      @ApiModelProperty(value = "휴대폰번호")
       private String phone;
 
     }
@@ -60,17 +66,21 @@ public class UserForm {
     @AllArgsConstructor
     public static class Get {
 
-      @ApiModelProperty(value = "이메일")
-      private String email;
+      @ApiModelProperty(value = "아이디")
+      private String loginId;
 
       @ApiModelProperty(value = "이름")
       private String name;
 
+      @ApiModelProperty(value = "이메일")
+      private String email;
+
+      @ApiModelProperty(value = "휴대폰번호")
+      private String phone;
+
       @ApiModelProperty(value = "권한")
       private String role;
 
-      @ApiModelProperty(value = "전화번호")
-      private String phone;
 
     }
   }

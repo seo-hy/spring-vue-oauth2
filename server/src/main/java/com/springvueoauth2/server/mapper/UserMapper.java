@@ -19,6 +19,8 @@ public abstract class UserMapper {
       out.setPassword(in.getPassword());
     }
 
+    out.setEmail(in.getEmail());
+
     out.setPhone(in.getPhone());
 
     return out;

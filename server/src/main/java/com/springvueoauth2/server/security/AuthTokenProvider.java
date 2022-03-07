@@ -10,11 +10,11 @@ import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthProvider implements InitializingBean {
+public class AuthTokenProvider implements InitializingBean {
 
   private final TokenEndpoint tokenEndpoint;
 
-  public AuthProvider(@Lazy TokenEndpoint tokenEndpoint) {
+  public AuthTokenProvider(@Lazy TokenEndpoint tokenEndpoint) {
     this.tokenEndpoint = tokenEndpoint;
   }
 

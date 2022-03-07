@@ -29,14 +29,14 @@ public class UserController {
 
   @SneakyThrows
   @ApiOperation("일반 사용자 등록")
-  @PostMapping("/user/signup")
+  @PostMapping("/users/signup")
   public UserForm.Output.Get addUser(@RequestBody UserForm.Input.Add in) {
     return service.addUser(in);
   }
 
   @SneakyThrows
   @ApiOperation("관리자 등록")
-  @PostMapping("/user/signup/admin")
+  @PostMapping("/users/signup/admin")
   public ResponseEntity addAdmin(@RequestBody UserForm.Input.Add in) {
     return new ResponseEntity(service.addAdmin(in), null, HttpStatus.CREATED);
   }
@@ -44,30 +44,30 @@ public class UserController {
   @SneakyThrows
   @PreAuthorize("hasRole('ADMIN')")
   @ApiOperation("사용자 목록 조회")
-  @GetMapping("/user")
+  @GetMapping("/users")
   public ResponseEntity getAll() {
     return new ResponseEntity(service.getAll(), null, HttpStatus.OK);
   }
 
   @SneakyThrows
   @ApiOperation("로그인 사용자 조회")
-  @GetMapping("/user/logged")
+  @GetMapping("/users/me")
   public ResponseEntity get(Principal principal) {
     return new ResponseEntity(service.getMe(principal), null, HttpStatus.OK);
   }
 
   @SneakyThrows
   @ApiOperation("사용자 수정")
-  @PutMapping("/user/{userId}")
+  @PutMapping("/users/{userId}")
   public ResponseEntity modify(@PathVariable Long userId, @RequestBody UserForm.Input.Modify in) {
     return new ResponseEntity(service.modify(userId, in), null, HttpStatus.OK);
   }
 
   @SneakyThrows
-  @ApiOperation("이메일 중복확인")
-  @GetMapping("/user/duplicate")
-  public ResponseEntity duplivate(String email) {
-    return new ResponseEntity(service.duplicate(email), null, HttpStatus.OK);
+  @ApiOperation("아이디 중복확인")
+  @GetMapping("/users/duplicate")
+  public ResponseEntity duplicate(String loginId) {
+    return new ResponseEntity(service.duplicate(loginId), null, HttpStatus.OK);
   }
 
 }
